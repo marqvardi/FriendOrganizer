@@ -18,12 +18,12 @@ namespace FriendOrganizer.UI.Data
 
         public Func<FriendOrganizerDbContext> _contextCreator { get; }
 
-        public async Task<List<Friend>> GetAllAsync()
+        public async Task<Friend> GetByIdAsync(int friendId)
         {
 
             using (var ctx  = _contextCreator())
             {
-                return await ctx.Friends.AsNoTracking().ToListAsync();  
+                return  await ctx.Friends.AsNoTracking().SingleAsync(f=> f.Id == friendId);
             }
 
             //yield return new Friend { FirstName = "Pedro", LastName = "Cabral", Email = "cabral@cabral.com" };
